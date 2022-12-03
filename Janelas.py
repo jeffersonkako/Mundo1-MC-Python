@@ -1,16 +1,18 @@
 import PySimpleGUI as sg
 
+# Tema do programa ------------------------------------------------------------------------------
 sg.theme('Black')
 
-# tela de login ------------------------------------------------
+
+# tela de login ---------------------------------------------------------------------------------
 def sg_Login():
     layoutLogin = [
         [sg.Text('Usuário')],
         [sg.Input(key='usuario')],
         [sg.Text('Senha')],
         [sg.Input(key='senha')],
-        [sg.Button('Login', button_color='#5c2fd8'), sg.Button('Sair', button_color='#a0a0a0')],
         [sg.Text('', key='mensagem')],
+        [sg.Button('Login', button_color='#5c2fd8'), sg.Button('Sair', button_color='#a0a0a0')],
     ]
     
     janelaLogin = sg.Window('LOGIN', layout=layoutLogin, font='Roboto 15')
@@ -34,17 +36,13 @@ def sg_Login():
             else:
                 janelaLogin['mensagem'].update('Senha ou Usuário incorreto', text_color='#ff0000')
 
-# ----------------------------------------------------------------------------------------------
 
-# Tela de MENU ---------------------------------------------------------------------------------
+# TELA DO MENU ---------------------------------------------------------------------------------
 def sg_Menu():
     layoutMenu = [
         [sg.Text('Menu Principal', font='Roboto 30', text_color='#5c2fd8')],
         [sg.Text()],
-        [sg.Button('CADASTROS')],
-        [sg.Button('FERRAMENTAS')],
-        [sg.Button('TÉCNICOS')],
-        [sg.Button('RESERVAS')],
+        [sg.Button('CADASTROS'), sg.Button('CONSULTAS')],
         [sg.Text()],
         [sg.Button('Sair', button_color='#a0a0a0', font='Roboto 15')],
     ]
@@ -56,6 +54,9 @@ def sg_Menu():
         if event == 'CADASTROS':
             janelaMenu.close()
             sg_CadastroGeral()
+        if event == 'CONSULTAS':
+            janelaMenu.close()
+            sg_Consultas()
         if event == 'Sair':
             janelaMenu.close()
             sg.Exit()
@@ -64,12 +65,13 @@ def sg_Menu():
             break
 
 
-# ----------------------------------------------------------------------------------------------
-
+# TELA DO CADASTRO---------------------------------------------------------------------------------
 def sg_CadastroGeral():
     layoutCadastroGeral = [
-        [sg.Text('Cadastrar', font='Roboto 30', text_color='#5c2fd8')],
-        [sg.Button('FERRAMENTAS'), sg.Button('TECNICOS')],
+        [sg.Text('CADASTRAR', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.Text()],
+        [sg.Button('FERRAMENTAS')],
+        [sg.Button('TECNICOS')],
         [sg.Button('RESERVA')],
         [sg.Text()],
         [sg.Button('Voltar', button_color='#a0a0a0')],
@@ -95,8 +97,7 @@ def sg_CadastroGeral():
             break
 
 
-# Tela de CADASTRO DE FERRAMENTAS --------------------------------------------------------------
-
+# TELA DO CADASTRO DE FERRAMENTAS --------------------------------------------------------------
 def sg_CadastroF():
     layoutCadF = [ 
             [sg.Text('Ferramenta'), sg.InputText()],
@@ -116,15 +117,13 @@ def sg_CadastroF():
         event, values = janelaCadastroF.read()
         if event == 'Voltar':
             janelaCadastroF.close()
-            sg_Menu()
+            sg_CadastroGeral()
             break
         elif event == sg.WIN_CLOSED:
             break
 
-# ----------------------------------------------------------------------------------------------
 
-# Tela de CADASTRO DE TECNICOS -----------------------------------------------------------------
-
+# TELA DO CADASTRO DE TÉCNICOS -----------------------------------------------------------------
 def sg_CadastroT():
     layoutCadT = [ 
             [sg.Text('CPF'), sg.InputText()],
@@ -146,15 +145,13 @@ def sg_CadastroT():
         event, values = janelaCadastroT.read()
         if event == 'Voltar':
             janelaCadastroT.close()
-            sg_Menu()
+            sg_CadastroGeral()
             break
         elif event == sg.WIN_CLOSED:
             break
 
-# ----------------------------------------------------------------------------------------------
 
-# Tela de RESERVAS -----------------------------------------------------------------------------
-
+# TELA DO CADASTRO DE RESERVAS ---------------------------------------------------------------------------------------------------------------------------------------------------------
 def sg_CadastroR():
     layoutCadR = [ 
             [sg.Text('Tecnico'), sg.InputText()],
@@ -170,11 +167,40 @@ def sg_CadastroR():
         event, values = janelaCadastroR.read()
         if event == 'Voltar':
             janelaCadastroR.close()
-            sg_Menu()
+            sg_CadastroGeral()
             break
         elif event == sg.WIN_CLOSED:
             break
-# ----------------------------------------------------------------------------------------------
 
-# 
+
+# TELA DE CONSULTAS -------------------------------------------------------------------------------------------------------------------------------
+def sg_Consultas():
+    layoutCadastroGeral = [
+        [sg.Text('CONSULTAR', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.Text()],
+        [sg.Button('FERRAMENTAS')],
+        [sg.Button('TECNICOS')],
+        [sg.Button('RESERVAS')],
+        [sg.Text()],
+        [sg.Button('Voltar', button_color='#a0a0a0')],
+        ]
+        
+    janelaConsultas = sg.Window('CONSULTAS', layout=layoutCadastroGeral, size=(400,300), element_justification='center', font='Roboto 15')
+
+    while True:
+        event, values = janelaConsultas.read()
+        if event =='FERRAMENTAS':
+            janelaConsultas.close()
+            sg_Consultas()
+        elif event =='TECNICOS':
+            janelaConsultas.close()
+            sg_Consultas()
+        elif event =='RESERVAS':
+            janelaConsultas.close()
+            sg_Consultas()
+        elif event =='Voltar':
+            janelaConsultas.close()
+            sg_Menu()
+        elif event == sg.WIN_CLOSED:
+            break
 
