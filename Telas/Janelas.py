@@ -30,6 +30,8 @@ def sg_Login():
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
+            janelaLogin.close()
+            sg_Login()
         if event == 'Sair':
             sg.Exit()
             break
