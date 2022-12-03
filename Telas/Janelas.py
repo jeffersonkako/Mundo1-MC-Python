@@ -119,6 +119,15 @@ def sg_CadastroF():
 
     while True:
         event, values = janelaCadastroF.read()
+        if event == 'Cadastrar':
+            sg.popup('Ferramenta Cadastrada', 
+            font='Roboto 20', 
+            background_color='#007d4d', 
+            auto_close=True, 
+            auto_close_duration=2,
+            no_titlebar=True)
+            janelaCadastroF.close()
+            sg_CadastroF()
         if event == 'Voltar':
             janelaCadastroF.close()
             sg_CadastroGeral()
@@ -147,6 +156,15 @@ def sg_CadastroT():
 
     while True:
         event, values = janelaCadastroT.read()
+        if event == 'Cadastrar':
+            sg.popup('Técnico Cadastrado', 
+            font='Roboto 20', 
+            background_color='#007d4d', 
+            auto_close=True, 
+            auto_close_duration=2,
+            no_titlebar=True)
+            janelaCadastroT.close()
+            sg_CadastroT()
         if event == 'Voltar':
             janelaCadastroT.close()
             sg_CadastroGeral()
@@ -169,6 +187,15 @@ def sg_CadastroR():
 
     while True:
         event, values = janelaCadastroR.read()
+        if event == 'Cadastrar':
+            sg.popup('Reserva Cadastrada', 
+            font='Roboto 20', 
+            background_color='#007d4d', 
+            auto_close=True, 
+            auto_close_duration=2,
+            no_titlebar=True)
+            janelaCadastroR.close()
+            sg_CadastroR()
         if event == 'Voltar':
             janelaCadastroR.close()
             sg_CadastroGeral()
