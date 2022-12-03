@@ -28,11 +28,11 @@ def sg_Login():
             usuario = values['usuario']
             senha = values['senha']
             if senha == senha_correta and usuario == usuario_correto:
-                janelaLogin['mensagem'].update('Login feito com sucesso.')
+                janelaLogin['mensagem'].update('Login feito com sucesso.', text_color='#00FF00')
                 janelaLogin.close()
                 sg_Menu()
             else:
-                janelaLogin['mensagem'].update('Senha ou Usuário incorreto', text_color='#5c2fd8')
+                janelaLogin['mensagem'].update('Senha ou Usuário incorreto', text_color='#ff0000')
 
 # ----------------------------------------------------------------------------------------------
 
