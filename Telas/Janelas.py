@@ -161,7 +161,7 @@ def sg_CadastroR():
             [sg.Text('Tecnico'), sg.InputText()],
             [sg.Text('Ferramenta', key='-FERRAMENTA-'), sg.InputText()],
             [sg.Input(key='DT-RESERVA', size=(20,1)) , sg.CalendarButton('Data da Reserva', close_when_date_chosen=True, target='DT-RESERVA',location=(800,400),no_titlebar=False)],
-            [sg.Input(key='DT-DEVOLUCAO', size=(20,1)), sg.CalendarButton('Data da Reserva', close_when_date_chosen=True, target='DT-DEVOLUCAO',location=(800,400),no_titlebar=False)],
+            [sg.Input(key='DT-DEVOLUCAO', size=(20,1)), sg.CalendarButton('Data da Devolução', close_when_date_chosen=True, target='DT-DEVOLUCAO',location=(800,400),no_titlebar=False)],
             [sg.Button('Cadastrar'), sg.Button('Voltar', button_color='#a0a0a0')] 
             ]
 
