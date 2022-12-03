@@ -42,7 +42,8 @@ def sg_Menu():
     layoutMenu = [
         [sg.Text('Menu Principal', font='Roboto 30', text_color='#5c2fd8')],
         [sg.Text()],
-        [sg.Button('CADASTROS'), sg.Button('CONSULTAS')],
+        [sg.Button('CADASTRAR'), sg.Button('CONSULTAR')],
+        [sg.Button('EDITAR')],
         [sg.Text()],
         [sg.Button('Sair', button_color='#a0a0a0', font='Roboto 15')],
     ]
@@ -51,12 +52,15 @@ def sg_Menu():
     
     while True:
         event, values = janelaMenu.read()
-        if event == 'CADASTROS':
+        if event == 'CADASTRAR':
             janelaMenu.close()
             sg_CadastroGeral()
-        if event == 'CONSULTAS':
+        if event == 'CONSULTAR':
             janelaMenu.close()
             sg_Consultas()
+        if event == 'EDITAR':
+            janelaMenu.close()
+            sg_Editar()
         if event == 'Sair':
             janelaMenu.close()
             sg.Exit()
@@ -200,6 +204,37 @@ def sg_Consultas():
             sg_Consultas()
         elif event =='Voltar':
             janelaConsultas.close()
+            sg_Menu()
+        elif event == sg.WIN_CLOSED:
+            break
+
+# TELA DE EDIÇÕES --------------------------------------------------------------------------------------
+def sg_Editar():
+    layoutCadastroGeral = [
+        [sg.Text('EDITAR', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.Text()],
+        [sg.Button('FERRAMENTAS')],
+        [sg.Button('TECNICOS')],
+        [sg.Button('RESERVAS')],
+        [sg.Text()],
+        [sg.Button('Voltar', button_color='#a0a0a0')],
+        ]
+        
+    janelaCadastroGeral = sg.Window('EDITAR', layout=layoutCadastroGeral, size=(400,300), element_justification='center', font='Roboto 15')
+
+    while True:
+        event, values = janelaCadastroGeral.read()
+        if event =='FERRAMENTAS':
+            janelaCadastroGeral.close()
+            sg_Editar()
+        elif event =='TECNICOS':
+            janelaCadastroGeral.close()
+            sg_Editar()
+        elif event =='RESERVA':
+            janelaCadastroGeral.close()
+            sg_Editar()
+        elif event =='Voltar':
+            janelaCadastroGeral.close()
             sg_Menu()
         elif event == sg.WIN_CLOSED:
             break
