@@ -1,6 +1,6 @@
-import Janelas as Janelas
+import Root as Root
 
-Janelas.sg_Login()
+Root.sg_Login()
 
 # login: admin
 # Senha: 123423

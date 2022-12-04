@@ -1,12 +1,15 @@
 import PySimpleGUI as sg
-import pandas as pd
 import openpyxl as op
 
-# Tema do programa ------------------------------------------------------------------------------
+
+
+# TEMA DO PROGRAMA ------------------------------------------------------------------------------
 sg.theme('Black')
 
 
-# tela de login ---------------------------------------------------------------------------------
+
+# TELA DE LOGIN ---------------------------------------------------------------------------------
+
 def sg_Login():
     layoutLogin = [
         [sg.Text('Usuário')],
@@ -40,8 +43,10 @@ def sg_Login():
         elif event == sg.WIN_CLOSED:
             break
         elif event == 'Login':
-            usuario_correto = 'admin'
-            senha_correta = '1234'
+#--------------------------------------------------------------
+            usuario_correto = 'Admin' #USUÁRIO DE ACESSO
+            senha_correta = '1234' #SENHA DE ACESSO
+#--------------------------------------------------------------            
             usuario = values['usuario']
             senha = values['senha']
             if senha == senha_correta and usuario == usuario_correto:
@@ -52,7 +57,9 @@ def sg_Login():
                 janelaLogin['mensagem'].update('Senha ou Usuário incorreto', text_color='#ff0000')
 
 
-# TELA DO MENU ---------------------------------------------------------------------------------
+
+# TELA DO MENU PRINCIPAL ---------------------------------------------------------------------------------
+
 def sg_Menu():
     layoutMenu = [
         [sg.Text('Menu Principal', font='Roboto 30', text_color='#5c2fd8')],
@@ -85,7 +92,9 @@ def sg_Menu():
             break
 
 
-# TELA DO CADASTRO---------------------------------------------------------------------------------
+
+# TELA DOS CADASTROS ---------------------------------------------------------------------------------
+
 def sg_CadastroGeral():
     layoutCadastroGeral = [
         [sg.Text('CADASTRAR', font='Roboto 30', text_color='#5c2fd8')],
@@ -98,7 +107,7 @@ def sg_CadastroGeral():
         [sg.Button('Voltar', button_color='#a0a0a0')],
         ]
         
-    janelaCadastroGeral = sg.Window('CADASTRO', layout=layoutCadastroGeral, size=(400,300), element_justification='center', font='Roboto 15')
+    janelaCadastroGeral = sg.Window('CADASTROS', layout=layoutCadastroGeral, size=(400,300), element_justification='center', font='Roboto 15')
 
     while True:
         event, values = janelaCadastroGeral.read()
@@ -118,7 +127,9 @@ def sg_CadastroGeral():
             break
 
 
+
 # TELA DO CADASTRO DE FERRAMENTAS --------------------------------------------------------------
+
 def sg_CadastroF():   
     layoutCadF = [ 
                 [sg.Text('Ferramenta'), sg.InputText('', key='FERRAMENTA')],
@@ -155,6 +166,7 @@ def sg_CadastroF():
 
 
 # TELA DO CADASTRO DE TÉCNICOS -----------------------------------------------------------------
+
 def sg_CadastroT():
     layoutCadT = [ 
             [sg.Text('CPF'), sg.InputText(key='CPF')],
@@ -183,7 +195,7 @@ def sg_CadastroT():
             lista = list(values.values())
             Add_Info('Tecnicos.xlsx', lista)
             janelaCadastroT.close()
-            sg_CadastroF()
+            sg_CadastroT()
         if event == 'Voltar':
             janelaCadastroT.close()
             sg_CadastroGeral()
@@ -192,7 +204,9 @@ def sg_CadastroT():
             break
 
 
+
 # TELA DO CADASTRO DE RESERVAS ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
 def sg_CadastroR():
     layoutCadR = [ 
             [sg.Text('Tecnico'), sg.InputText(key='TECNICO')],
@@ -212,10 +226,14 @@ def sg_CadastroR():
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
-            lista = list(values.values())
+            listaTemp = list(values.values()) #dados temporarios
+            lista=[]
+            for item in listaTemp: # verificar espaços 
+                if item not in ['', None]:
+                    lista.append(item)
             Add_Info('Reservas.xlsx', lista)
             janelaCadastroR.close()
-            sg_CadastroF()
+            sg_CadastroR()
         if event == 'Voltar':
             janelaCadastroR.close()
             sg_CadastroGeral()
@@ -223,7 +241,10 @@ def sg_CadastroR():
             sg.exit()
             break
 
+
+
 # TELA DE CONSULTAS -------------------------------------------------------------------------------------------------------------------------------
+
 def sg_Consultas():
     layoutCadastroGeral = [
         [sg.Text('CONSULTAR', font='Roboto 30', text_color='#5c2fd8')],
@@ -245,29 +266,35 @@ def sg_Consultas():
             sg_ConsultaF()
         elif event =='TECNICOS':
             janelaConsultas.close()
-            sg_Consultas()
+            sg_ConsultaT()
         elif event =='RESERVAS':
             janelaConsultas.close()
-            sg_Consultas()
+            sg_ConsultaR()
         elif event =='Voltar':
             janelaConsultas.close()
             sg_Menu()
         elif event == sg.WIN_CLOSED:
             break
 
-# TELA DE REALIZAR CONSULTAS ---------------------------------------------------------------------------
-listaF = []
-listaF_head = ['Ferramentas','Modelo','Fabricante','Peso','Quantidade','Voltagem','Tipo']
-def sg_ConsultaF():
-    layoutConsultaF_ldE = [ 
+
+
+# TELA DE CONSULTA DE FERRAMENTAS ---------------------------------------------------------------------------
+
+def sg_ConsultaF(lista=False, values='', colunas=[1,2,3]):
+    if lista == False:
+        listaF=[]
+    else:
+        listaF = CarregarTab('Ferramentas.xlsx', filtro=True, values = values, colunas = colunas)
+    
+    listaF_head = ['Ferramentas','Modelo','Fabricante','Peso','Quantidade','Voltagem','Tipo']
+    layoutConsultaF_topo = [ 
             [sg.Text('Ferramenta'), sg.InputText(key='-CS-Ferramenta-')],
             [sg.Text('Modelo'), sg.InputText(key='-CS-Modelo-')],
             [sg.Text('Fabricante'), sg.InputText(key='-CS-Fabricante-')],
-            [sg.Text('Peso'), sg.InputText(key='-CS-Peso-')],
-            [sg.Button('Consultar'), sg.Button('Voltar', button_color='#a0a0a0')],
+            [sg.Submit('Consultar'), sg.Button('Voltar', button_color='#a0a0a0')],
             ]
     
-    layoutConsultaF_ldD = [
+    layoutConsultaF_baixo = [
         [sg.Table(values=listaF, headings=listaF_head ,max_col_width=35,
         auto_size_columns=True,
         justification='center',
@@ -277,13 +304,13 @@ def sg_ConsultaF():
     ]
 
     layoutConsultaF = [
-        [sg.Column(layoutConsultaF_ldE)],
+        [sg.Column(layoutConsultaF_topo)],
         [sg.HSeparator()],
-        [sg.Column(layoutConsultaF_ldD)],
+        [sg.Column(layoutConsultaF_baixo)],
 
     ]
 
-    janelaConsultaF = sg.Window('CADASTRO DE FERRAMENTAS', layout=layoutConsultaF, font='Roboto 15')
+    janelaConsultaF = sg.Window('CONSULTA DE FERRAMENTAS', layout=layoutConsultaF, font='Roboto 15')
 
     while True:
         event, values = janelaConsultaF.read()
@@ -294,8 +321,9 @@ def sg_ConsultaF():
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
+            lista = list(values.values())
             janelaConsultaF.close()
-            sg_ConsultaF()
+            sg_ConsultaF(lista=True, values=lista)
         if event == 'Voltar':
             janelaConsultaF.close()
             sg_Consultas()
@@ -303,7 +331,118 @@ def sg_ConsultaF():
         elif event == sg.WIN_CLOSED:
             break
 
+
+
+# TELA DE CONSULTA DE TÉCNICOS -------------------------------------------------------------------------
+
+def sg_ConsultaT(lista=False, values='', colunas=[1,2,3]):
+    if lista == False:
+        listaT=[]
+    else:
+        listaT = CarregarTab('Tecnicos.xlsx', filtro=True, values = values, colunas = colunas)
+    
+    listaT_head = ['CPF','Nome','Sobrenome','Telefone','Turno']
+    layoutConsultaT_topo = [ 
+            [sg.Text('CPF'), sg.InputText(key='-CPF-')],
+            [sg.Text('Nome'), sg.InputText(key='-NOME-')],
+            [sg.Text('Sobrenome'), sg.InputText(key='-SOBRENOME-')],
+            [sg.Submit('Consultar'), sg.Button('Voltar', button_color='#a0a0a0')],
+            ]
+    
+    layoutConsultaT_baixo = [
+        [sg.Table(values=listaT, headings=listaT_head ,max_col_width=35,
+        auto_size_columns=True,
+        justification='center',
+        num_rows=10,
+        key='-TABELA-',
+        row_height=35)],
+    ]
+
+    layoutConsultaT = [
+        [sg.Column(layoutConsultaT_topo)],
+        [sg.HSeparator()],
+        [sg.Column(layoutConsultaT_baixo)],
+    ]
+
+    janelaConsultaT = sg.Window('CONSULTA DE TÉCNICOS', layout=layoutConsultaT, font='Roboto 15')
+
+    while True:
+        event, values = janelaConsultaT.read()
+        if event == 'Consultar':
+            sg.popup('Consulta Realizada',
+            font='Roboto 20', 
+            background_color='#007d4d', 
+            auto_close=True, 
+            auto_close_duration=10,
+            no_titlebar=True)
+            lista = list(values.values())
+            janelaConsultaT.close()
+            sg_ConsultaT(lista=True, values=lista)
+        if event == 'Voltar':
+            janelaConsultaT.close()
+            sg_Consultas()
+            break
+        elif event == sg.WIN_CLOSED:
+            break
+
+
+
+# TELA DE CONSULTA DE RESERVAS -------------------------------------------------------------------------
+
+def sg_ConsultaR(lista=False, values='', colunas=[1,2,3]):
+    if lista == False:
+        listaR=[]
+    else:
+        listaR = CarregarTab('Reservas.xlsx', filtro=True, values = values, colunas = colunas)
+    
+    listaR_head = ['CPF','Nome','Sobrenome','Telefone','Turno']
+    layoutConsultaR_topo = [ 
+            [sg.Text('CPF'), sg.InputText(key='-CPF-')],
+            [sg.Text('Nome'), sg.InputText(key='-NOME-')],
+            [sg.Text('Sobrenome'), sg.InputText(key='-SOBRENOME-')],
+            [sg.Submit('Consultar'), sg.Button('Voltar', button_color='#a0a0a0')],
+            ]
+    
+    layoutConsultaR_baixo = [
+        [sg.Table(values=listaR, headings=listaR_head ,max_col_width=35,
+        auto_size_columns=True,
+        justification='center',
+        num_rows=10,
+        key='-TABELA-',
+        row_height=35)],
+    ]
+
+    layoutConsultaR = [
+        [sg.Column(layoutConsultaR_topo)],
+        [sg.HSeparator()],
+        [sg.Column(layoutConsultaR_baixo)],
+    ]
+
+    janelaConsultaR = sg.Window('CONSULTA DE RESERVAS', layout=layoutConsultaR, font='Roboto 15')
+
+    while True:
+        event, values = janelaConsultaR.read()
+        if event == 'Consultar':
+            sg.popup('Consulta Realizada',
+            font='Roboto 20', 
+            background_color='#007d4d', 
+            auto_close=True, 
+            auto_close_duration=10,
+            no_titlebar=True)
+            lista = list(values.values())
+            janelaConsultaR.close()
+            sg_ConsultaR(lista=True, values=lista)
+        if event == 'Voltar':
+            janelaConsultaR.close()
+            sg_Consultas()
+            break
+        elif event == sg.WIN_CLOSED:
+            break
+
+
+
 # TELA DE EDIÇÕES --------------------------------------------------------------------------------------
+
 def sg_Editar():
     layoutCadastroGeral = [
         [sg.Text('EDITAR', font='Roboto 30', text_color='#5c2fd8')],
@@ -336,7 +475,9 @@ def sg_Editar():
             break
 
 
+
 # DADOS INPUTS ---------------------------------------------------------------------------------------------
+
 def DadosReserva(values):
     info = 'RESERVA CADASTRADA\n'
     nome = '\nNome: '+ values['R-TECNICO']
@@ -379,20 +520,19 @@ def DadosTecnico(values):
     info += Telefone
     return info
 
+
+
+# EQUIPE NÃO PARTICIPOU ---------------------------------------------------
+
 def DadosEquipe():
-    info = 'Estacio - TEAM 2\n'
-    Aluno1 = '\nJefferson'
+    info = 'Estácio - TEAM 2\n'
+    Aluno1 = '\nJefferson Ponte Pessoa'
     info += Aluno1
-    Aluno2 = '\nAmandio'
-    info += Aluno2
-    Aluno3 = '\nAriel'
-    info += Aluno3
-    Aluno4 = '\nRaiza'
-    info += Aluno4
     return info
 
 
-# acessar banco de dados ------------------------------------------------------------
+
+# BANCO DE DADOS ------------------------------------------------------------
 
 def AbrirBD(caminho):
     bd = op.load_workbook(caminho)
@@ -415,6 +555,42 @@ def Add_Info(caminho, lista):
         ws.cell(row=ultimaL, column=col).value = lista[col-1]
 
     FecharBD(caminho, wb)
+
+
+
+# FILTROS DE PESQUISA - Tive ajudar do @samuel-borba de outro grupo ------------------------------------------------------------------
+
+def CarregarTab(caminho, values='', filtro=False, colunas=''):
+    wb = AbrirBD(caminho)
+    ws = wb['Sheet1']
+    tabela = []
+    linha = []
+    checkFiltro = True
+    for lin in range(2,1000000):
+        if ws.cell(row=lin, column=1).value == None: break
+        linha = []
+        checkFiltro = True
+        if filtro == True:
+            cont = 0
+            for col in colunas:
+                if values[cont] in ['', []]:
+                    cont += 1
+                    continue
+                if str(ws.cell(row=lin, column=col).value).find(values[cont]) == -1:  # verificando coluna via filtro
+                    checkFiltro = False
+                    break
+                cont += 1
+        if checkFiltro == False : continue
+
+        for col in range(1,1000):
+            if ws.cell(row=lin, column=col).value == None: break
+            linha.append(ws.cell(row=lin, column=col).value)
+        tabela.append(linha)
+
+    FecharBD(caminho, wb)
+    return tabela
+
+
 
 
 
