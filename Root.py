@@ -14,13 +14,14 @@ sg.theme('Black')
 
 def sg_Login():
     layoutLogin = [
-        [sg.Text('Usuário')],
+        [sg.Image(filename='./estacio.png')],
+        [sg.Text('Usuário'),],
         [sg.Input(key='usuario')],
         [sg.Text('Senha')],
         [sg.Input(key='senha', password_char='*')],
         [sg.Text('', key='mensagem')],
         [sg.Button('Login', button_color='#5c2fd8'), 
-        sg.Button('Sair', button_color='#a0a0a0'), sg.Push(),
+        sg.Button('Sair', button_color='#a0a0a0'),
         sg.Button('Equipe', button_color='#a0a0a0')
         ],
     ]
