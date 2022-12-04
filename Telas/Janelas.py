@@ -10,10 +10,10 @@ def sg_Login():
         [sg.Text('Usuário')],
         [sg.Input(key='usuario')],
         [sg.Text('Senha')],
-        [sg.Input(key='senha')],
+        [sg.Input(key='senha', password_char='*')],
         [sg.Text('', key='mensagem')],
         [sg.Button('Login', button_color='#5c2fd8'), 
-        sg.Button('Sair', button_color='#a0a0a0'), sg.Text(),
+        sg.Button('Sair', button_color='#a0a0a0'), sg.Push(),
         sg.Button('Equipe', button_color='#a0a0a0')
         ],
     ]
@@ -54,6 +54,7 @@ def sg_Login():
 def sg_Menu():
     layoutMenu = [
         [sg.Text('Menu Principal', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.HSeparator()],
         [sg.Text()],
         [sg.Button('CADASTRAR'), sg.Button('CONSULTAR')],
         [sg.Button('EDITAR')],
@@ -86,6 +87,7 @@ def sg_Menu():
 def sg_CadastroGeral():
     layoutCadastroGeral = [
         [sg.Text('CADASTRAR', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.HSeparator()],
         [sg.Text()],
         [sg.Button('FERRAMENTAS')],
         [sg.Button('TECNICOS')],
@@ -224,6 +226,7 @@ def sg_CadastroR():
 def sg_Consultas():
     layoutCadastroGeral = [
         [sg.Text('CONSULTAR', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.HSeparator()],
         [sg.Text()],
         [sg.Button('FERRAMENTAS')],
         [sg.Button('TECNICOS')],
@@ -255,6 +258,7 @@ def sg_Consultas():
 def sg_Editar():
     layoutCadastroGeral = [
         [sg.Text('EDITAR', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.HSeparator()],
         [sg.Text()],
         [sg.Button('FERRAMENTAS')],
         [sg.Button('TECNICOS')],
