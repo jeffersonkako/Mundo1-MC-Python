@@ -1,4 +1,4 @@
-import Telas.Janelas as Janelas
+import Janelas as Janelas
 
 Janelas.sg_Login()
 
