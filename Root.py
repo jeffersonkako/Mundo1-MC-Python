@@ -1,3 +1,5 @@
+# BIBLIOTECAS -----------------------------------------------------------------------------------
+
 import PySimpleGUI as sg
 import openpyxl as op
 
@@ -28,8 +30,7 @@ def sg_Login():
     while True:
         event, values = janelaLogin.read()
         if event == 'Equipe':
-            Team2_inf = DadosEquipe()
-            sg.popup(Team2_inf,
+            sg.popup('Jefferson Ponte Pessoa\n Matricula: 202208291228\n Turma:22.3',
             font='Roboto 20', 
             background_color='#5c2fd8', 
             auto_close=True, 
@@ -44,7 +45,7 @@ def sg_Login():
             break
         elif event == 'Login':
 #--------------------------------------------------------------
-            usuario_correto = 'Admin' #USUÁRIO DE ACESSO
+            usuario_correto = 'admin' #USUÁRIO DE ACESSO
             senha_correta = '1234' #SENHA DE ACESSO
 #--------------------------------------------------------------            
             usuario = values['usuario']
@@ -66,7 +67,7 @@ def sg_Menu():
         [sg.HSeparator()],
         [sg.Text()],
         [sg.Button('CADASTRAR'), sg.Button('CONSULTAR')],
-        [sg.Button('EDITAR')],
+        [sg.Button('EDITAR'),sg.Button('ESTOQUE')],
         [sg.Text()],
         [sg.Button('Sair', button_color='#a0a0a0', font='Roboto 15')],
     ]
@@ -84,6 +85,9 @@ def sg_Menu():
         if event == 'EDITAR':
             janelaMenu.close()
             sg_Editar()
+        if event == 'ESTOQUE':
+            janelaMenu.close()
+            sg_Estoque()
         if event == 'Sair':
             janelaMenu.close()
             sg.Exit()
@@ -284,7 +288,7 @@ def sg_ConsultaF(lista=False, values='', colunas=[1,2,3]):
     if lista == False:
         listaF=[]
     else:
-        listaF = CarregarTab('Ferramentas.xlsx', filtro=True, values = values, colunas = colunas)
+        listaF = CarregarTabela('Ferramentas.xlsx', filtro=True, values = values, colunas = colunas)
     
     listaF_head = ['Ferramentas','Modelo','Fabricante','Peso','Quantidade','Voltagem','Tipo']
     layoutConsultaF_topo = [ 
@@ -339,7 +343,7 @@ def sg_ConsultaT(lista=False, values='', colunas=[1,2,3]):
     if lista == False:
         listaT=[]
     else:
-        listaT = CarregarTab('Tecnicos.xlsx', filtro=True, values = values, colunas = colunas)
+        listaT = CarregarTabela('Tecnicos.xlsx', filtro=True, values = values, colunas = colunas)
     
     listaT_head = ['CPF','Nome','Sobrenome','Telefone','Turno']
     layoutConsultaT_topo = [ 
@@ -393,7 +397,7 @@ def sg_ConsultaR(lista=False, values='', colunas=[1,2,3]):
     if lista == False:
         listaR=[]
     else:
-        listaR = CarregarTab('Reservas.xlsx', filtro=True, values = values, colunas = colunas)
+        listaR = CarregarTabela('Reservas.xlsx', filtro=True, values = values, colunas = colunas)
     
     listaR_head = ['CPF','Nome','Sobrenome','Telefone','Turno']
     layoutConsultaR_topo = [ 
@@ -522,16 +526,6 @@ def DadosTecnico(values):
 
 
 
-# EQUIPE NÃO PARTICIPOU ---------------------------------------------------
-
-def DadosEquipe():
-    info = 'Estácio - TEAM 2\n'
-    Aluno1 = '\nJefferson Ponte Pessoa'
-    info += Aluno1
-    return info
-
-
-
 # BANCO DE DADOS ------------------------------------------------------------
 
 def AbrirBD(caminho):
@@ -558,9 +552,9 @@ def Add_Info(caminho, lista):
 
 
 
-# FILTROS DE PESQUISA - Tive ajudar do @samuel-borba de outro grupo ------------------------------------------------------------------
+# FILTROS DE PESQUISA - Tive ajudar do @Samuel-Borba de outro grupo ------------------------------------------------------------------
 
-def CarregarTab(caminho, values='', filtro=False, colunas=''):
+def CarregarTabela(caminho, values='', filtro=False, colunas=''):
     wb = AbrirBD(caminho)
     ws = wb['Sheet1']
     tabela = []
@@ -589,6 +583,58 @@ def CarregarTab(caminho, values='', filtro=False, colunas=''):
 
     FecharBD(caminho, wb)
     return tabela
+
+
+
+# TELA ESTOQUE -------------------------------------------------------------------------------------------------------
+
+def sg_Estoque(lista=False, values='', colunas=[1,2,3,4,5,6,7]):
+    if lista == False:
+        listaE=[]
+    else:
+        listaE = CarregarTabela('Ferramentas.xlsx', filtro=False, values = values, colunas = colunas)
+    
+    tabela_head = ['Ferramentas','Modelo','Fabricante','Peso','Quantidade','Voltagem','Tipo']
+    layoutEstoque_top = [ 
+            [sg.Text('ESTOQUE DE FERRAMENTAS'), sg.Submit('Listar'), sg.Button('Voltar', button_color='#a0a0a0')],
+            ]
+    
+    layoutEstoque_bot = [
+        [sg.Table(values=listaE, headings=tabela_head ,max_col_width=35,
+        auto_size_columns=True,
+        justification='center',
+        num_rows=10,
+        key='-TABELA-',
+        row_height=35)],
+    ]
+
+    layoutEstoque = [
+        [sg.Column(layoutEstoque_top)],
+        [sg.HSeparator()],
+        [sg.Column(layoutEstoque_bot)],
+
+    ]
+
+    janelaEstoque = sg.Window('ESTOQUE', layout=layoutEstoque, font='Roboto 15')
+
+    while True:
+        event, values = janelaEstoque.read()
+        if event == 'Listar':
+            sg.popup('Listar Estoque de Ferramentas',
+            font='Roboto 20', 
+            background_color='#5c2fd8', 
+            auto_close=True, 
+            auto_close_duration=10,
+            no_titlebar=True)
+            lista = list(values.values())
+            janelaEstoque.close()
+            sg_Estoque(lista=True, values=values)
+        if event == 'Voltar':
+            janelaEstoque.close()
+            sg_Menu()
+            break
+        elif event == sg.WIN_CLOSED:
+            break
 
 
 
