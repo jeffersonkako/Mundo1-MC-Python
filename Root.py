@@ -56,7 +56,7 @@ def sg_Login():
 
 def sg_Menu():
     layoutMenu = [
-        [sg.Text('Central de Ferramentaria', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.Text('CENTRAL FERRAMENTARIA', font='Roboto 30', text_color='#5c2fd8')],
         [sg.HSeparator()],
         [sg.Text('')],
         [sg.Button('CADASTRAR', size=(20),), sg.Button('CONSULTAR', size=(20))],
