@@ -390,7 +390,7 @@ def sg_ConsultaR(lista=False, values='', colunas=[1,2,3]):
     else:
         listaR = CarregarTabela('Reservas.xlsx', filtro=True, values = values, colunas = colunas)
     
-    listaR_head = ['CPF','Nome','Sobrenome','Telefone','Turno']
+    listaR_head = ['Técnico','Ferramenta','Reserva','Devolução']
     layoutConsultaR_topo = [ 
             [sg.Text('CPF'), sg.InputText(key='-CPF-')],
             [sg.Text('Nome'), sg.InputText(key='-NOME-')],
