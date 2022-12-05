@@ -392,9 +392,9 @@ def sg_ConsultaR(lista=False, values='', colunas=[1,2,3]):
     
     listaR_head = ['Técnico','Ferramenta','Reserva','Devolução']
     layoutConsultaR_topo = [ 
-            [sg.Text('CPF'), sg.InputText(key='-CPF-')],
-            [sg.Text('Nome'), sg.InputText(key='-NOME-')],
-            [sg.Text('Sobrenome'), sg.InputText(key='-SOBRENOME-')],
+            [sg.Text('Técnico'), sg.InputText(key='-Tecnico-')],
+            [sg.Text('Ferramenta'), sg.InputText(key='-Ferramenta-')],
+            [sg.Input(key='DT-RESERVA', size=(20,1)) , sg.CalendarButton('Data da Reserva', close_when_date_chosen=True, target='DT-RESERVA',location=(800,400),no_titlebar=False)],
             [sg.Submit('Consultar', size=(10)), sg.Button('Voltar', button_color='#a0a0a0', size=(10))],
             ]
     
