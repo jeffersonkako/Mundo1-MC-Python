@@ -20,25 +20,17 @@ def sg_Login():
         [sg.Text('Senha')],
         [sg.Input(key='senha', password_char='*')],
         [sg.Text('', key='mensagem')],
-        [sg.Button('Login', button_color='#5c2fd8'), 
-        sg.Button('Sair', button_color='#a0a0a0'),
-        sg.Button('Equipe', button_color='#a0a0a0')
-        ],
+        [sg.Button('Login', button_color='#5c2fd8', size=(10)), 
+        sg.Button('Sair', button_color='#a0a0a2', size=(5)), sg.Button('Developer', button_color='#a0a0a0', size=(8))],
     ]
     
-    janelaLogin = sg.Window('LOGIN', layout=layoutLogin, font='Roboto 15')
+    janelaLogin = sg.Window('LOGIN', layout=layoutLogin, font='Roboto 15', size=(500,400))
 
     while True:
         event, values = janelaLogin.read()
-        if event == 'Equipe':
-            sg.popup('Jefferson Ponte Pessoa\n Matricula: 202208291228\n Turma:22.3',
-            font='Roboto 20', 
-            background_color='#5c2fd8', 
-            auto_close=True, 
-            auto_close_duration=10,
-            no_titlebar=True)
+        if event == 'Developer':
             janelaLogin.close()
-            sg_Login()
+            Developer()
         if event == 'Sair':
             sg.Exit()
             break
@@ -64,16 +56,16 @@ def sg_Login():
 
 def sg_Menu():
     layoutMenu = [
-        [sg.Text('Menu Principal', font='Roboto 30', text_color='#5c2fd8')],
+        [sg.Text('Central de Ferramentaria', font='Roboto 30', text_color='#5c2fd8')],
         [sg.HSeparator()],
-        [sg.Text()],
-        [sg.Button('CADASTRAR'), sg.Button('CONSULTAR')],
-        [sg.Button('EDITAR'),sg.Button('ESTOQUE')],
-        [sg.Text()],
-        [sg.Button('Sair', button_color='#a0a0a0', font='Roboto 15')],
+        [sg.Text('')],
+        [sg.Button('CADASTRAR', size=(20),), sg.Button('CONSULTAR', size=(20))],
+        [sg.Button('EDITAR', size=(20)),sg.Button('ESTOQUE', size=(20))],
+        [sg.Text('')],
+        [sg.Button('Sair', button_color='#a0a0a0', font='Roboto 15', size=(15))],
     ]
     
-    janelaMenu = sg.Window('PROGRAMA - TEAM 02', layout=layoutMenu, size=(400,300), element_justification='center', font='Roboto 15')
+    janelaMenu = sg.Window('PROGRAMA - JEFFERSON', layout=layoutMenu, size=(500,300), font='Roboto 15', element_justification='center')
     
     while True:
         event, values = janelaMenu.read()
@@ -105,14 +97,13 @@ def sg_CadastroGeral():
         [sg.Text('CADASTRAR', font='Roboto 30', text_color='#5c2fd8')],
         [sg.HSeparator()],
         [sg.Text()],
-        [sg.Button('FERRAMENTAS')],
-        [sg.Button('TECNICOS')],
-        [sg.Button('RESERVA')],
+        [sg.Button('FERRAMENTAS', size=(20)),sg.Button('TECNICOS', size=(20))],
+        [sg.Button('RESERVA', size=(20))],
         [sg.Text()],
         [sg.Button('Voltar', button_color='#a0a0a0')],
         ]
         
-    janelaCadastroGeral = sg.Window('CADASTROS', layout=layoutCadastroGeral, size=(400,300), element_justification='center', font='Roboto 15')
+    janelaCadastroGeral = sg.Window('CADASTROS', layout=layoutCadastroGeral, size=(500,300), element_justification='center', font='Roboto 15')
 
     while True:
         event, values = janelaCadastroGeral.read()
@@ -140,20 +131,20 @@ def sg_CadastroF():
                 [sg.Text('Ferramenta'), sg.InputText('', key='FERRAMENTA')],
                 [sg.Text('Modelo'), sg.InputText('', key='MODELO')],
                 [sg.Text('Fabricante'), sg.InputText('', key='FABRICANTE')],
-                [sg.Text('Peso'), sg.InputText('', key='PESO')],
+                [sg.Text('Material'), sg.InputText('', key='MATERIAL')],
                 [sg.Text('Quantidade'), sg.InputText('', key='QUANTIDADE')],
                 [sg.Text('Voltagem'), sg.InputText('', key='VOLTAGEM')],
                 [sg.Text('Tipo'), sg.InputText('', key='TIPO')],
-                [sg.Submit('Cadastrar'), sg.Button('Voltar', button_color='#a0a0a0')] 
+                [sg.Submit('Cadastrar', size=(10)), sg.Button('Voltar', button_color='#a0a0a0', size=(10))] 
     ]
 
-    janelaCadastroF = sg.Window('CADASTRO DE FERRAMENTAS', layout=layoutCadF, font='Roboto 15')
+    janelaCadastroF = sg.Window('CADASTRO DE FERRAMENTAS', layout=layoutCadF, font='Roboto 15', element_justification='center')
     
     while True:
         event, values = janelaCadastroF.read()
         if event == 'Cadastrar':
             sg.Popup('Ferramenta Cadastrada', font='Roboto 20', 
-            background_color='#007d4d', 
+            background_color='#5c2fd8', 
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
@@ -184,16 +175,16 @@ def sg_CadastroT():
             sg.Radio('Team 2', 'RADIO', key='TEAM2'),
             sg.Radio('Team 3', 'RADIO', key='TEAM3'),
             sg.Radio('Team 4', 'RADIO', key='TEAM4')],
-            [sg.Submit('Cadastrar'), sg.Button('Voltar', button_color='#a0a0a0')] 
+            [sg.Submit('Cadastrar', size=(10)), sg.Button('Voltar', button_color='#a0a0a0', size=(10))] 
             ]
 
-    janelaCadastroT = sg.Window('CADASTRO DE TÉCNICOS', layout=layoutCadT, font='Roboto 15')
+    janelaCadastroT = sg.Window('CADASTRO DE TÉCNICOS', layout=layoutCadT, font='Roboto 15', element_justification='center')
     
     while True:
         event, values = janelaCadastroT.read()
         if event == 'Cadastrar':
             sg.Popup('Técnico Cadastrado', font='Roboto 20', 
-            background_color='#007d4d', 
+            background_color='#5c2fd8', 
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
@@ -218,16 +209,16 @@ def sg_CadastroR():
             [sg.Text('Ferramenta'), sg.InputText(key='FERRAMENTA')],
             [sg.Input(key='DT-RESERVA', size=(20,1)) , sg.CalendarButton('Data da Reserva', close_when_date_chosen=True, target='DT-RESERVA',location=(800,400),no_titlebar=False)],
             [sg.Input(key='DT-DEVOLUCAO', size=(20,1)), sg.CalendarButton('Data da Devolução', close_when_date_chosen=True, target='DT-DEVOLUCAO',location=(800,400),no_titlebar=False)],
-            [sg.Submit('Cadastrar'), sg.Button('Voltar', button_color='#a0a0a0')] 
+            [sg.Submit('Cadastrar', size=(10)), sg.Button('Voltar', button_color='#a0a0a0', size=(10))] 
             ]
 
-    janelaCadastroR = sg.Window('CADASTRO DE RESERVAS', layout=layoutCadR, font='Roboto 15')
+    janelaCadastroR = sg.Window('CADASTRO DE RESERVAS', layout=layoutCadR, font='Roboto 15', element_justification='center')
     
     while True:
         event, values = janelaCadastroR.read()
         if event == 'Cadastrar':
             sg.Popup('Reserva Cadastrada', font='Roboto 20', 
-            background_color='#007d4d', 
+            background_color='#5c2fd8', 
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
@@ -255,14 +246,13 @@ def sg_Consultas():
         [sg.Text('CONSULTAR', font='Roboto 30', text_color='#5c2fd8')],
         [sg.HSeparator()],
         [sg.Text()],
-        [sg.Button('FERRAMENTAS')],
-        [sg.Button('TECNICOS')],
-        [sg.Button('RESERVAS')],
+        [sg.Button('FERRAMENTAS', size=(20)), sg.Button('TECNICOS', size=(20))],
+        [sg.Button('RESERVAS', size=(20))],
         [sg.Text()],
-        [sg.Button('Voltar', button_color='#a0a0a0')],
+        [sg.Button('Voltar', button_color='#a0a0a0', size=(20))],
         ]
         
-    janelaConsultas = sg.Window('CONSULTAS', layout=layoutCadastroGeral, size=(400,300), element_justification='center', font='Roboto 15')
+    janelaConsultas = sg.Window('CONSULTAS', layout=layoutCadastroGeral, size=(500,300), element_justification='center', font='Roboto 15')
 
     while True:
         event, values = janelaConsultas.read()
@@ -291,12 +281,12 @@ def sg_ConsultaF(lista=False, values='', colunas=[1,2,3]):
     else:
         listaF = CarregarTabela('Ferramentas.xlsx', filtro=True, values = values, colunas = colunas)
     
-    listaF_head = ['Ferramentas','Modelo','Fabricante','Peso','Quantidade','Voltagem','Tipo']
+    listaF_head = ['Ferramentas','Modelo','Fabricante','Material','Quantidade','Voltagem','Tipo']
     layoutConsultaF_topo = [ 
             [sg.Text('Ferramenta'), sg.InputText(key='-CS-Ferramenta-')],
             [sg.Text('Modelo'), sg.InputText(key='-CS-Modelo-')],
             [sg.Text('Fabricante'), sg.InputText(key='-CS-Fabricante-')],
-            [sg.Submit('Consultar'), sg.Button('Voltar', button_color='#a0a0a0')],
+            [sg.Submit('Consultar', size=(10)), sg.Button('Voltar', button_color='#a0a0a0', size=(10))],
             ]
     
     layoutConsultaF_baixo = [
@@ -315,14 +305,14 @@ def sg_ConsultaF(lista=False, values='', colunas=[1,2,3]):
 
     ]
 
-    janelaConsultaF = sg.Window('CONSULTA DE FERRAMENTAS', layout=layoutConsultaF, font='Roboto 15')
+    janelaConsultaF = sg.Window('CONSULTA DE FERRAMENTAS', layout=layoutConsultaF, font='Roboto 15', element_justification='center')
 
     while True:
         event, values = janelaConsultaF.read()
         if event == 'Consultar':
             sg.popup('Cosulta Realizada',
             font='Roboto 20', 
-            background_color='#007d4d', 
+            background_color='#5c2fd8', 
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
@@ -351,7 +341,7 @@ def sg_ConsultaT(lista=False, values='', colunas=[1,2,3]):
             [sg.Text('CPF'), sg.InputText(key='-CPF-')],
             [sg.Text('Nome'), sg.InputText(key='-NOME-')],
             [sg.Text('Sobrenome'), sg.InputText(key='-SOBRENOME-')],
-            [sg.Submit('Consultar'), sg.Button('Voltar', button_color='#a0a0a0')],
+            [sg.Submit('Consultar', size=(10)), sg.Button('Voltar', button_color='#a0a0a0', size=(10))],
             ]
     
     layoutConsultaT_baixo = [
@@ -369,14 +359,14 @@ def sg_ConsultaT(lista=False, values='', colunas=[1,2,3]):
         [sg.Column(layoutConsultaT_baixo)],
     ]
 
-    janelaConsultaT = sg.Window('CONSULTA DE TÉCNICOS', layout=layoutConsultaT, font='Roboto 15')
+    janelaConsultaT = sg.Window('CONSULTA DE TÉCNICOS', layout=layoutConsultaT, font='Roboto 15', element_justification='center')
 
     while True:
         event, values = janelaConsultaT.read()
         if event == 'Consultar':
             sg.popup('Consulta Realizada',
             font='Roboto 20', 
-            background_color='#007d4d', 
+            background_color='#5c2fd8', 
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
@@ -405,7 +395,7 @@ def sg_ConsultaR(lista=False, values='', colunas=[1,2,3]):
             [sg.Text('CPF'), sg.InputText(key='-CPF-')],
             [sg.Text('Nome'), sg.InputText(key='-NOME-')],
             [sg.Text('Sobrenome'), sg.InputText(key='-SOBRENOME-')],
-            [sg.Submit('Consultar'), sg.Button('Voltar', button_color='#a0a0a0')],
+            [sg.Submit('Consultar', size=(10)), sg.Button('Voltar', button_color='#a0a0a0', size=(10))],
             ]
     
     layoutConsultaR_baixo = [
@@ -423,14 +413,14 @@ def sg_ConsultaR(lista=False, values='', colunas=[1,2,3]):
         [sg.Column(layoutConsultaR_baixo)],
     ]
 
-    janelaConsultaR = sg.Window('CONSULTA DE RESERVAS', layout=layoutConsultaR, font='Roboto 15')
+    janelaConsultaR = sg.Window('CONSULTA DE RESERVAS', layout=layoutConsultaR, font='Roboto 15', element_justification='center')
 
     while True:
         event, values = janelaConsultaR.read()
         if event == 'Consultar':
             sg.popup('Consulta Realizada',
             font='Roboto 20', 
-            background_color='#007d4d', 
+            background_color='#5c2fd8', 
             auto_close=True, 
             auto_close_duration=10,
             no_titlebar=True)
@@ -453,14 +443,13 @@ def sg_Editar():
         [sg.Text('EDITAR', font='Roboto 30', text_color='#5c2fd8')],
         [sg.HSeparator()],
         [sg.Text()],
-        [sg.Button('FERRAMENTAS')],
-        [sg.Button('TECNICOS')],
-        [sg.Button('RESERVAS')],
+        [sg.Button('FERRAMENTAS', size=(20)), sg.Button('TECNICOS', size=(20))],
+        [sg.Button('RESERVAS', size=(20))],
         [sg.Text()],
         [sg.Button('Voltar', button_color='#a0a0a0')],
         ]
         
-    janelaCadastroGeral = sg.Window('EDITAR', layout=layoutCadastroGeral, size=(400,300), element_justification='center', font='Roboto 15')
+    janelaCadastroGeral = sg.Window('EDITAR', layout=layoutCadastroGeral, size=(500,300), element_justification='center', font='Roboto 15')
 
     while True:
         event, values = janelaCadastroGeral.read()
@@ -479,51 +468,6 @@ def sg_Editar():
         elif event == sg.WIN_CLOSED:
             break
 
-
-
-# DADOS INPUTS ---------------------------------------------------------------------------------------------
-
-def DadosReserva(values):
-    info = 'RESERVA CADASTRADA\n'
-    nome = '\nNome: '+ values['R-TECNICO']
-    info += nome
-    ferramentaR = '\nFerramenta: '+ values['R-FERRAMENTA']
-    info += ferramentaR
-    dataR = '\nReserva: ' + values['DT-RESERVA']
-    info += dataR
-    dataD = '\nDevolução: ' + values['DT-DEVOLUCAO']
-    info += dataD
-    return info
-
-
-def DadosFerramentas(values):
-    info = 'FERRAMENTA CADASTRADA\n'
-    Ferramenta = '\nFerramenta: '+ values['C-FERRAMENTAS']
-    info += Ferramenta
-    Fabricante = '\nFabricante: '+ values['C-FABRICANTE']
-    info += Fabricante
-    Peso = '\nPeso: ' + values['C-PESO']
-    info += Peso
-    Quantidade = '\nQuantidade: ' + values['C-QUANTIDADE']
-    info += Quantidade
-    Voltagem = '\nVoltagem: ' + values['C-VOLTAGENS']
-    info += Voltagem
-    Tipo = '\nTipo: ' + values['C-TIPO']
-    info += Tipo
-    return info
-
-
-def DadosTecnico(values):
-    info = 'Técnico Cadastrado\n'
-    CPF = '\nCPF: '+ values['T-CPF']
-    info += CPF
-    Nome = '\nNome: '+ values['T-NOME']
-    info += Nome
-    Sobrenome = '\nSobrenome: ' + values['T-SOBRENOME']
-    info += Sobrenome
-    Telefone = '\nTelefone: ' + values['T-TELEFONE']
-    info += Telefone
-    return info
 
 
 
@@ -595,9 +539,9 @@ def sg_Estoque(lista=False, values='', colunas=[1,2,3,4,5,6,7]):
     else:
         listaE = CarregarTabela('Ferramentas.xlsx', filtro=False, values = values, colunas = colunas)
     
-    tabela_head = ['Ferramentas','Modelo','Fabricante','Peso','Quantidade','Voltagem','Tipo']
+    tabela_head = ['Ferramentas','Modelo','Fabricante','Material','Quantidade','Voltagem','Tipo']
     layoutEstoque_top = [ 
-            [sg.Text('ESTOQUE DE FERRAMENTAS'), sg.Submit('Listar'), sg.Button('Voltar', button_color='#a0a0a0')],
+            [sg.Text('ESTOQUE DE FERRAMENTAS'), sg.Submit('Listar', size=(10)), sg.Button('Voltar', button_color='#a0a0a0', size=(10))],
             ]
     
     layoutEstoque_bot = [
@@ -616,7 +560,7 @@ def sg_Estoque(lista=False, values='', colunas=[1,2,3,4,5,6,7]):
 
     ]
 
-    janelaEstoque = sg.Window('ESTOQUE', layout=layoutEstoque, font='Roboto 15')
+    janelaEstoque = sg.Window('ESTOQUE', layout=layoutEstoque, font='Roboto 15', element_justification='center')
 
     while True:
         event, values = janelaEstoque.read()
@@ -634,6 +578,33 @@ def sg_Estoque(lista=False, values='', colunas=[1,2,3,4,5,6,7]):
             janelaEstoque.close()
             sg_Menu()
             break
+        elif event == sg.WIN_CLOSED:
+            break
+
+
+
+# TELA DEVELOPER ----------------------------------------------------------
+
+def Developer():
+    layoutDEV = [
+        [sg.Image(filename='./dev.png')],
+        [sg.HSeparator()],
+        [sg.Text('Desenvolvedor: Jefferson Ponte Pessoa')],
+        [sg.Text('Matricula: 202208291228')],
+        [sg.Text('Curso: Desenvolvimento Full Stack')],
+        [sg.Text('Turma: 22.3')],
+        [sg.Push()],
+
+        sg.Button('Sair', button_color='#5c2fd8', size=(10)),
+        ],
+    
+    janelaDEV = sg.Window('Developer', layout=layoutDEV, font='Roboto 20', element_justification='center', size=(500,300))
+
+    while True:
+        event, values = janelaDEV.read()
+        if event == 'Sair':
+            janelaDEV.close()
+            sg_Login()
         elif event == sg.WIN_CLOSED:
             break
 
