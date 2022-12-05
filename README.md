@@ -63,7 +63,7 @@ execução do trabalho é fator critico de sucesso
 <img width="597" alt="cadR" src="https://user-images.githubusercontent.com/104142117/205527615-4bc8538d-7477-41c8-99bd-bb5673caeec2.png">
 <img width="819" alt="dadosF" src="https://user-images.githubusercontent.com/104142117/205533876-f42d7c5c-a350-4c85-bf07-05cbd1bd5ffe.png">
 <img width="608" alt="dadost" src="https://user-images.githubusercontent.com/104142117/205533883-54c8e585-a045-447a-8703-a8993a912a5e.png">
-<img width="677" alt="dadosr" src="https://user-images.githubusercontent.com/104142117/205533893-29160736-3a7f-4526-9975-e792a1d6cd25.png">
+<img width="697" alt="dadosR" src="https://user-images.githubusercontent.com/104142117/205542231-27c840cc-719a-482a-b169-b2cde0263be4.png">
 <img width="819" alt="dadose" src="https://user-images.githubusercontent.com/104142117/205533907-3dd9b2ef-532d-4567-a3c3-da2aee0ec525.png">
 
 ---
