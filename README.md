@@ -61,12 +61,15 @@ execução do trabalho é fator critico de sucesso
 <img width="598" alt="cadF" src="https://user-images.githubusercontent.com/104142117/205527589-3a86a1f7-565e-49be-b735-7c8081097b2f.png">
 <img width="598" alt="cadT" src="https://user-images.githubusercontent.com/104142117/205527599-e323284b-0be1-4d2f-8ea9-c4732bca9c4b.png">
 <img width="597" alt="cadR" src="https://user-images.githubusercontent.com/104142117/205527615-4bc8538d-7477-41c8-99bd-bb5673caeec2.png">
-
+<img width="819" alt="dadosF" src="https://user-images.githubusercontent.com/104142117/205533876-f42d7c5c-a350-4c85-bf07-05cbd1bd5ffe.png">
+<img width="608" alt="dadost" src="https://user-images.githubusercontent.com/104142117/205533883-54c8e585-a045-447a-8703-a8993a912a5e.png">
+<img width="677" alt="dadosr" src="https://user-images.githubusercontent.com/104142117/205533893-29160736-3a7f-4526-9975-e792a1d6cd25.png">
+<img width="819" alt="dadose" src="https://user-images.githubusercontent.com/104142117/205533907-3dd9b2ef-532d-4567-a3c3-da2aee0ec525.png">
 
 ---
 
-<b>Developer : Jefferson Pessoa
-- Codado por mim em cerca de 24h devido desistencia da minha equipe.
+<b>Desenvolvedor : Jefferson Pessoa
+- Codei do zero em cerca de 30h, devido desistência da minha equipe.
 
 
 
