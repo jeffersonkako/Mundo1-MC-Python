@@ -156,7 +156,7 @@ def sg_CadastroF():
             janelaCadastroF.close()
             sg_CadastroGeral()
         if event == sg.WIN_CLOSED:
-            sg.exit()
+            sg.Exit()
             break
 
 
@@ -196,7 +196,7 @@ def sg_CadastroT():
             janelaCadastroT.close()
             sg_CadastroGeral()
         if event == sg.WIN_CLOSED:
-            sg.exit()
+            sg.Exit()
             break
 
 
@@ -234,7 +234,7 @@ def sg_CadastroR():
             janelaCadastroR.close()
             sg_CadastroGeral()
         if event == sg.WIN_CLOSED:
-            sg.exit()
+            sg.Exit()
             break
 
 
